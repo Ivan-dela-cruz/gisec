@@ -1,4 +1,4 @@
-<script type="text/javascript" src="{{asset('js/jquery.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/plugins.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/scripts.js')}}"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plugins.js"></script>
+<script type="text/javascript" src="js/scripts.js"></script>
 @yield('scripts')
