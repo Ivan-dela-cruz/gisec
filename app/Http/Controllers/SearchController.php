@@ -12,11 +12,24 @@ class SearchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
         $searches = Search::orderBy('created_at', 'DESC')->get();
         return view('welcome',compact('searches'));
+    }
+    public function filter(Request $request)
+    {
+        $query = trim($request->get('description'));
+        $location = trim($request->get('location'));
+        $title = trim($request->get('title'));
+
+        $searches = Search::orderBy('title','DESC')
+            ->where('description', 'like', '%' . $query . '%')
+            ->orWhere('location', 'like', '%' . $location . '%')
+            ->orWhere('title', 'like', '%' . $title . '%')
+            ->get();
+        return view('welcome',compact('searches','query'));
     }
 
     /**

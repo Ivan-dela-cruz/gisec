@@ -8,26 +8,22 @@
     <header class="main-header dark-header fs-header sticky">
         <div class="header-inner">
             <div class="logo-holder">
-                <a href="#"><img src="images/logo.png" alt=""></a>
+                <a href="{{\Illuminate\Support\Facades\URL::to('/')}}"><img src="images/logo.png" alt=""></a>
             </div>
-            <div class="header-search vis-header-search">
-                <div class="header-search-input-item">
-                    <input type="text" placeholder="Palabras clave" value=""/>
-                </div>
-                <div class="header-search-select-item">
-                    <select data-placeholder="Todas las categorías" class="chosen-select">
-                        <option>Todas las categorías</option>
-                        <option>Artículos</option>
-                        <option>Revistas</option>
-                        <option>Ivestigadores</option>
-                        <option>Ponencias</option>
-                        <option>Libros</option>
-                    </select>
-                </div>
-                <button class="header-search-button" onclick="window.location.href='listing.html'">Buscar</button>
-            </div>
-            <div class="show-search-button"><i class="fa fa-search"></i> <span>Buscar</span></div>
+            <form action="{{route('filter')}}" method="GET" autocomplete="off" role="search">
+                <div class="header-search vis-header-search">
+                    <div class="header-search-input-item">
+                        <input name="description" type="text" placeholder="Palabras clave" value="@if(isset($query)){{$query}}@else @endif"/>
+                        <input hidden name="title" type="text" placeholder="Palabras clave" value="0"/>
+                        <input hidden name="location" type="text" placeholder="Palabras clave" value="0"/>
+                    </div>
+                    <div class="header-search-select-item">
 
+                    </div>
+                    <button type="submit" class="header-search-button">Buscar</button>
+                </div>
+                <div class="show-search-button"><i class="fa fa-search"></i> <span>Buscar</span></div>
+            </form>
             <!-- nav-button-wrap-->
             <div class="nav-button-wrap color-bg">
                 <div class="nav-button">
@@ -90,7 +86,13 @@
                 <div class="listsearch-options fl-wrap" id="lisfw">
                     <div class="container">
                         <div class="listsearch-header fl-wrap">
-                            <h3>Resultados: <span>Artículo académico</span></h3>
+                            <h3>Resultados:
+                                <span>
+                                    @if(isset($query))
+                                        {{$query}}
+                                    @endif
+                                </span>
+                            </h3>
                             <div class="listing-view-layout">
                                 <ul>
                                     <li><a class="grid active" href="#"><i class="fa fa-th-large"></i></a></li>
@@ -100,40 +102,42 @@
                         </div>
                         <!-- listsearch-input-wrap  -->
                         <div class="listsearch-input-wrap fl-wrap">
-                            <div class="listsearch-input-item">
-                                <i class="mbri-key single-i"></i>
-                                <input type="text" placeholder="Palabras clave?" value=""/>
-                            </div>
-                            <div class="listsearch-input-item">
-                                <select data-placeholder="Location" class="chosen-select">
-                                    <option>Todas las localizaciones</option>
-                                    <option>Universidad</option>
-                                    <option>Departamento</option>
-                                    <option>Facultad</option>
-                                    <option>Extensión</option>
-                                    <option>Matriz</option>
-                                </select>
-                            </div>
-                            <div class="listsearch-input-item">
-                                <select data-placeholder="All Categories" class="chosen-select">
-                                    <option>Todas las categorías</option>
-                                    <option>Artículo</option>
-                                    <option>Revista</option>
-                                    <option>Libro</option>
-                                    <option>Tesis</option>
-                                    <option>Conferencia</option>
-                                </select>
-                            </div>
-                            <div class="listsearch-input-text" id="autocomplete-container">
-                                <label><i class="mbri-map-pin"></i> Ingrese la dirección </label>
-                                <input type="text" placeholder="Destination , Area , Street" id="autocomplete-input"
-                                       class="qodef-archive-places-search" value=""/>
-                                <a href="#" class="loc-act qodef-archive-current-location"><i
-                                        class="fa fa-dot-circle-o"></i></a>
-                            </div>
+                            <form action="{{route('filter')}}" method="GET" autocomplete="off" role="search">
 
-                            <button class="button fs-map-btn">Actualizar</button>
+                                <div class="listsearch-input-item">
+                                    <i class="mbri-key single-i"></i>
+                                    <input name="description" type="text" placeholder="Palabras clave?"
+                                           value="@if(isset($query)){{$query}}@else @endif"/>
+                                </div>
+                                <div class="listsearch-input-item">
+                                    <select name="title" data-placeholder="Location" class="chosen-select">
+                                        <option value="0">Todas las localizaciones</option>
+                                        <option value="Universidad">Universidad</option>
+                                        <option value="Departamento">Departamento</option>
+                                        <option value="Facultad">Facultad</option>
+                                        <option value="Extensión">Extensión</option>
+                                        <option value="Matriz">Matriz</option>
+                                    </select>
+                                </div>
+                                <div class="listsearch-input-item">
+                                    <select name="location" data-placeholder="All Categories" class="chosen-select">
+                                        <option value="0">Todas las categorías</option>
+                                        <option value="Centro de investigación">Centro de investigación</option>
+                                        <option value="Area de Docentes">Area de Docentes</option>
+                                        <option value="Departamento de desarrollo Ecuciencia">Departamento de desarrollo
+                                            Ecuciencia
+                                        </option>
+                                        <option value="Biblioteca de la UTC">Biblioteca de la UTC</option>
+                                    </select>
+                                </div>
 
+                                <div class="listsearch-input-text" id="autocomplete-container">
+
+
+                                </div>
+                                <input type="submit" class="button fs-map-btn" value="Actualizar"/>
+
+                            </form>
                         </div>
                         <!-- listsearch-input-wrap end -->
                     </div>

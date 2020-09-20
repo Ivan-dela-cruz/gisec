@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'SearchController@index');
+Route::get('filter', 'SearchController@filter')->name('filter');
 
 Auth::routes();
 
