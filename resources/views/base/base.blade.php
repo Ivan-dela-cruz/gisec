@@ -9,6 +9,7 @@
     <meta name="robots" content="index, follow"/>
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!--=============== css  ===============-->
     @include('base.css')
